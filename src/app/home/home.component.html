@@ -1,0 +1,97 @@
+
+
+
+<div class="toolbar" role="banner">
+  <p>Québec</p>
+</div>
+
+<div class="content" role="main">
+
+  <!-- Highlight Card -->
+  <div class="card highlight-card card-small" style="margin-top:20px;">
+    <span>COVID-19 Symptom Self-Assessment Tool</span>
+  </div>
+
+  <!-- Information -->
+  <div class="grid" style="margin-top:50px;">
+
+    <div class="box">
+      <h3>This tool is not intended to be a substitute for medical attention. Always follow your healthcare professional’s instructions.</h3>
+      <p>This self-assessment tool does not apply to children from 0 to 6 months of age. If you are unsure, call Info-Santé 811.</p>
+    </div>
+    <div class="box" style="background-color:rgb(199, 250, 222);">
+      <p>Are you being asked to get tested for COVID-19, but have no symptoms of the disease?</p>
+      <div class="card-container">
+        <div class="card card-small" (click)="selection.value = 'component'" tabindex="0" style="margin-top:5px;">
+          <span>SYMPTOM-FREE SCREENING</span>
+        </div>
+      </div>
+    </div>
+    <div class="box" style="margin-top:30px;">
+      <p>If your child of 6 months to 5 years of age has been showing one or more symptoms on this list for less than 24 hours, it is recommended that you keep them at home and avoid contact with other people.</p>
+      <h4>After 24 hours, re-evaluate the situation to see if there is any change in their symptoms. If one or more symptoms persist for more than 24 hours, proceed with self-assessment.</h4>
+    </div>
+
+    <div class="box">
+      <div id="inner-grid">
+        <div>
+          <h3>Fever</h3>
+          <ul>
+            <p>Children<b> ages 5 and under</b></p>
+            <li>
+              <p><b>Rectal</b> temperature of 38.5 °C (101.3 °F) and above</p>
+            </li>
+          </ul>
+          <ul><p>Children <b>ages 6 and older</b></p>
+            <li>
+              <p><b>Oral</b> temperature of 38.1 °C (100.6 °F) and above</p>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>General symptoms</h3>
+          <ul>
+            <li>
+              <p>Sudden loss of smell without nasal congestion, with or without loss of taste</p>
+            </li>
+            <li>
+              <p>Great fatigue</p>
+            </li>
+            <li>
+              <p>Significant loss of appetite</p>
+            </li>
+            <li>
+              <p>Generalized muscle pain (not related to physical exertion)</p>
+            </li>
+            <li>
+              <p>Headache</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Respiratory symptoms</h3>
+        </div>
+        <div>
+          <h3>
+            Gastrointestinal symptoms
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="box" style="margin-top:10px;">
+      <p>Perform self-assessment if you fear you’ve been exposed to COVID-19 (SARS-CoV-2 virus) or show symptoms that could be associated with COVID-19. You can also use this tool to assess the status of your child or another family member.</p>
+      <div class="card-container">
+        <div class="card card-small" (click)="selection.value = 'component'" tabindex="0" style="margin-top:18px;">
+          <a style="color: #ffffff" routerLink="/survey" role="button"><span>START</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <input type="hidden" #selection>
+</div>
+
+
+
