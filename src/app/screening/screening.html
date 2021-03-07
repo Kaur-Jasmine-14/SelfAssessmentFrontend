@@ -165,144 +165,25 @@ export class SurveyComponent implements OnInit {
     const json = { showQuestionNumbers: 'off',
       questions: [
         {
-          type: 'html',
-          name: 'introduction',
-          html: '\n' + '\n' +
-          '<div class="d-flex"><h5 class="mx-auto justify-content-center">Are you having difficulty breathing? For example,do you feel like you’re out of breath or suffocating?</h5></div>' +
-            '<div class="d-flex"><h5 class="mx-auto justify-content-center"><strong>OR</strong></h5></div>' +
-            '<div class="d-flex"><h5 class="mx-auto justify-content-center">Do you have a lot of trouble breathing even when at rest,such as shortness of breath that makes it hard to speak?</h5></div>',
+          type: 'radiogroup',
+          name: 'Please select the reason that best applies to your situation:',
+          title: ' ',
+          choices: ['I have been identified as having been in close contact with someone who has COVID-19', 'I received a notification from the COVID Alert App', 'I received a request by Public Health, 'I experienced a risky situation or had similar behaviour', 'I am worried / anxious / Other reason'],
           colCount: 0
         },
         {
           type: 'radiogroup',
-          name: 'haveTroubleBreating',
+          name: 'Have you had symptoms of COVID-19?',
           title: ' ',
+          visibleIf: '{I received a notification from the COVID Alert App}=\'Yes\'',
           choices: ['Yes', 'No'],
           colCount: 0
         },
-        {
-          type: 'radiogroup',
-          name: 'ageranges',
-          title: 'Please select an age range:',
-          visibleIf: '{haveTroubleBreating}=\'No\'',
-          choices: ['6 months-5 years', '6-17 years', '18 years+'],
-          colCount: 0
-        },
+    
         {
           type: 'html',
-          name: 'agerange1-text',
-          visibleIf: '{ageranges}=\'6 months-5 years\'',
-          html: '' +
-            '<div class="d-flex"><h5 class="mx-auto justify-content-center">Is your child experiencing ANY of the following symptoms?</h5></div>' +
-            '<div class="d-flex">' +
-            '<ul class="mx-auto justify-content-center">' +
-            '<li>Fever (38.5°C rectal temperature (101.3°F) or higher)</li>' +
-            '<li>Cough (new or worse),shortness of breath,or difficulty breathing</li>' +
-            '<li>Runny nose or nasal congestion or sore throat<br />' +
-            'AND<br />' +
-            'fever (38.1°C rectal temperature (100.6°F) or higher)</li>' +
-            '<li>Abdominal pain,vomiting,or diarrhea<br />' +
-            'AND<br />' +
-            'fever (38.1°C rectal temperature (100.6°F) or higher)</li>' +
-          '</ul>' +
-            '</div>',
-          colCount: 0
-        },
-        {
-          type: 'radiogroup',
-          name: 'agerange1',
-          title: ' ',
-          visibleIf: '{ageranges}=\'6 months-5 years\'',
-          choices: ['Yes', 'No'],
-          colCount: 0
-        },
-        {
-          type: 'html',
-          name: 'agerange2-text',
-          visibleIf: '{ageranges}=\'6-17 years\'',
-          html: '<div class="d-flex"><h5 class="mx-auto justify-content-left">Does your child have <strong>ANY</strong> of the following symptoms?\n</h5></div>',
-          colCount: 0
-        },
-        {
-          type: 'html',
-          name: 'agerange3-text',
-          visibleIf: '{ageranges}=\'18 years+\'',
-          html: '<div class="d-flex"><h5 class="mx-auto justify-content-left">Are you experiencing <strong>ANY</strong> of the following symptoms?\n</h5></div>',
-          colCount: 0
-        },
-        {
-          type: 'html',
-          name: 'same-text',
-          visibleIf: '{ageranges}=\'6-17 years\' || {ageranges}=\'18 years+\'',
-          html:
-            '<div class="d-flex">' +
-            '<ul class="mx-auto justify-content-center">' +
-            '<li>Fever (oral temperature 38.1°C (100.6°F) or higher)</li>' +
-            '<li>Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste</li>' +
-            '<li>Recent cough or worsening of a chronic cough</li>' +
-            '<li>Shortness of breath</li>' +
-            '<li>Trouble breathing</li>' +
-            '<li>Sore throat</li>' +
-            '<li>Runny nose or congestion (of unknown cause)</li>' +
-            '</ul>' +
-            '</div>',
-          colCount: 0
-        },
-        {
-          type: 'radiogroup',
-          name: 'same-text-options',
-          title: ' ',
-          visibleIf: '{ageranges}=\'6-17 years\' || {ageranges}=\'18 years+\'',
-          choices: ['Yes', 'No'],
-          colCount: 0
-        },
-
-
-        {
-          type: 'html',
-          name: 'same1',
-          visibleIf: '{ageranges}=\'6-17 years\' && {same-text-options}=\'No\'',
-          html: '<div class="d-flex"><h5 class="mx-auto justify-content-center">Does your child have any 2 of the following symptoms?\n</h5></div>',
-          colCount: 0
-        },
-        {
-          type: 'html',
-          name: 'same2',
-          visibleIf: '{ageranges}=\'18 years+\' && {same-text-options}=\'No\'',
-          html: '<div class="d-flex"><h5 class="mx-auto justify-content-center">Are you experiencing any 2 of the following symptoms?\n</h5></div>',
-          colCount: 0
-        },
-        {
-          type: 'html',
-          name: 'any_2_of_symptoms-text',
-          visibleIf: '{same-text-options}=\'No\'',
-          html:
-            '' +
-            '<div class="d-flex">' +
-            '<ul class="mx-auto justify-content-center">' +
-            '<li>Stomach aches\n</li>' +
-            '<li>Nausea or vomiting\n</li>' +
-            '<li>Diarrhea\n</li>' +
-            '<li>Major fatigue\n</li>' +
-            '<li>Significant loss of appetite\n' +
-            '<li>Generalized muscle pain (not related to physical exertion)\n</li>' +
-            '<li>Headache</li>' +
-            '</ul>' +
-            '</div>',
-          colCount: 0
-        },
-        {
-          type: 'radiogroup',
-          name: 'any_2_of_symptoms-option',
-          title: ' ',
-          visibleIf: '{same-text-options}=\'No\'',
-          choices: ['Yes', 'No'],
-          colCount: 0
-        },
-        {
-          type: 'html',
-          name: 'one_of_the_situations',
-          visibleIf: '{agerange1}=\'Yes\' || {same-text-options}=\'Yes\' || {any_2_of_symptoms-option}=\'Yes\'',
+          name: 'agerange1-1options-text',
+          visibleIf: '{agerange1-options}=\'Yes\' || {agerange2}=\'Yes\'|| {agerange2-option}=\'Yes\' || {agerange3}=\'Yes\'',
           html: '' +
             '<div class="d-flex"><h6 class="mx-auto justify-content-center">Are you or the person who is going to get tested in one of the situations below?</h6></div>' +
             '<div class="d-flex">' +
@@ -325,20 +206,20 @@ export class SurveyComponent implements OnInit {
         },
         {
           type: 'radiogroup',
-          name: 'one_of_the_situations-option',
+          name: 'agerange1-1options',
           title: ' ',
-          visibleIf: '{agerange1}=\'Yes\' || {same-text-options}=\'Yes\' || {any_2_of_symptoms-option}=\'Yes\'',
+          visibleIf: '{agerange1-options}=\'Yes\' || {agerange2}=\'Yes\'|| {agerange2-option}=\'Yes\' || {agerange3}=\'Yes\'',
           choices: ['Yes', 'No'],
           colCount: 0
         },
-
+    
 
 
         {
           type: 'radiogroup',
           name: 'submit-for-recommendation',
           title: ' ',
-          visibleIf: '{agerange1}=\'No\'||{haveTroubleBreating}=\'Yes\'||{one_of_the_situations-option}=\'Yes\'||{one_of_the_situations-option}=\'No\' || {any_2_of_symptoms-option}=\'No\' ',
+          visibleIf: '{agerange1-1options}=\'Yes\'||{haveTroubleBreating}=\'Yes\'||{agerange2-1}=\'Yes\'||{agerange2-1}=\'No\'',
           choices: ['Submit'],
           colCount: 0
         },
@@ -346,8 +227,6 @@ export class SurveyComponent implements OnInit {
 
       ]
     };
-
-
     const survey = new Survey.Model(json);
     survey
       .onComplete
