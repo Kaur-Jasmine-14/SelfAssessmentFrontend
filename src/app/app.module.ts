@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {SurveyComponent} from './survey/survey.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {SurveyComponent} from './survey/survey.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
