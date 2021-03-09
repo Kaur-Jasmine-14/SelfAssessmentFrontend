@@ -6,10 +6,21 @@ import * as Survey from 'survey-angular';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
-import {SurveyModel} from 'survey-angular';
+import {Question, SurveyModel} from 'survey-angular';
 import {QuestionService} from '../question.service';
 
 Survey.StylesManager.applyTheme('bootstrap');
+
+
+function triggerCompleteManually(this: any) {
+  const survey = this.survey;
+  survey.completeLastPage();
+}
+
+Survey
+    .FunctionFactory
+    .Instance
+    .register('triggerCompleteManually', triggerCompleteManually);
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -43,7 +54,7 @@ export class SurveyComponent implements OnInit {
       logoImage: 'sv_logo__image',
       headerText: 'sv_header__text',
       navigationButton: '',
-      completedPage: '',
+      completedPage: 'text-center',
       navigation: {
         complete: 'btn btn-lg btn-success',
         prev: 'btn sv_prev_btn',
@@ -52,7 +63,7 @@ export class SurveyComponent implements OnInit {
         preview: 'btn sv_preview_btn',
         edit: 'btn sv_edit_btn'
       },
-     
+
       pageTitle: '',
       pageDescription: 'small',
       row: 'sv_row',
@@ -163,6 +174,14 @@ export class SurveyComponent implements OnInit {
     };
 
     const json = { showQuestionNumbers: 'off',
+      showNavigationButtons: 'off',
+      triggers: [
+        {
+          type: 'runexpression',
+          expression: '{submit-for-recommendation}=\'Submit\'',
+          runExpression: 'triggerCompleteManually()'
+        }
+      ],
       questions: [
         {
           type: 'html',
@@ -342,8 +361,6 @@ export class SurveyComponent implements OnInit {
           choices: ['Submit'],
           colCount: 0
         },
-
-
       ]
     };
 
@@ -364,6 +381,7 @@ export class SurveyComponent implements OnInit {
 
     Survey.SurveyNG.render('surveyElement', {model: survey, css: myCss });
   }
+
 
 
 }

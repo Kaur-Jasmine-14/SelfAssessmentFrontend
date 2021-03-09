@@ -33,7 +33,7 @@ p {
   height: 70px;
   display: flex;
   align-items: center;
-  background-color: #3FB618;
+  background-color: hsl(105, 77%, 40%) ;
   color: white;
   font-weight: 600;
 }

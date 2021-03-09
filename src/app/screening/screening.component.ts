@@ -11,6 +11,17 @@ import {QuestionService} from '../question.service';
 
 Survey.StylesManager.applyTheme('bootstrap');
 
+function triggerCompleteManually(this: any) {
+  const survey = this.survey;
+  survey.completeLastPage();
+}
+
+Survey
+    .FunctionFactory
+    .Instance
+    .register('triggerCompleteManually', triggerCompleteManually);
+
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'survey',
@@ -18,7 +29,7 @@ Survey.StylesManager.applyTheme('bootstrap');
     <div id="surveyElement"></div>
   </div>`
 })
-export class SurveyComponent implements OnInit {
+export class ScreeningComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
   @Input()
   result: any;
@@ -43,7 +54,7 @@ export class SurveyComponent implements OnInit {
       logoImage: 'sv_logo__image',
       headerText: 'sv_header__text',
       navigationButton: '',
-      completedPage: '',
+      completedPage: 'text-center',
       navigation: {
         complete: 'btn btn-lg btn-success',
         prev: 'btn sv_prev_btn',
@@ -315,13 +326,23 @@ export class SurveyComponent implements OnInit {
       }
     };
 
+
+
     const json = { showQuestionNumbers: 'off',
+      showNavigationButtons: 'off',
+      triggers: [
+        {
+          type: 'runexpression',
+          expression: '{submit-for-recommendation}=\'Submit\'',
+          runExpression: 'triggerCompleteManually()'
+        }
+      ],
       questions: [
         {
           type: 'radiogroup',
           name: 'Reason',
           title: 'Please select the reason that best applies to your situation:',
-          choices: ['I have been identified as having been in close contact with someone who has COVID-19', 'I received a notification from the COVID Alert App', 'I received a request by Public Health', 'I experienced a risky situation or had similar behaviour', 'I am worried / anxious / Other reason'],
+          choices: ['I have been identified as having been in close contact with someone who has COVID-19\n', 'I received a notification from the COVID Alert App\n', 'I received a request by Public Health\n', 'I experienced a risky situation or had similar behaviour', 'I am worried / anxious / Other reason'],
           colCount: 0
         },
         {
@@ -426,7 +447,7 @@ export class SurveyComponent implements OnInit {
         {
           type: 'html',
           name: 'one-of-the-situations-text',
-          visibleIf: '{Reason}=\'I have been identified as having been in close contact with someone who has COVID-19\'' || '{Reason}=\'I received a request by Public Health\'' || '{Reason}=\'I experienced a risky situation or had similar behaviour\'' || '{Reason}=\'I am worried / anxious / Other reason\'' || '{quarantine}=\'Yes\'' || '{14days-options}=\'Yes\'' || '{professional-work}=\'Yes\'' || '{bubble}=\'No\'',
+          visibleIf: '{Reason}=\'I have been identified as having been in close contact with someone who has COVID-19\' || {Reason}=\'I received a request by Public Health\' || {Reason}=\'I experienced a risky situation or had similar behaviour\' || {Reason}=\'I am worried / anxious / Other reason\' || {quarantine}=\'Yes\' || {14days-options}=\'Yes\' || {professional-work}=\'Yes\' || {bubble}=\'No\'',
           html: '<div class="d-flex"><h5 class="mx-auto justify-content-center">Are you or the person who is going to get tested in one of the situations below?\n</h5></div>' +
             '' +
             '<div class="d-flex">' +
@@ -451,7 +472,7 @@ export class SurveyComponent implements OnInit {
           type: 'radiogroup',
           name: 'one-of-the-situations',
           title: ' ',
-          visibleIf: '{Reason}=\'I have been identified as having been in close contact with someone who has COVID-19\'' || '{Reason}=\'I received a request by Public Health\'' || '{Reason}=\'I experienced a risky situation or had similar behaviour\'' || '{Reason}=\'I am worried / anxious / Other reason\'' || '{quarantine}=\'Yes\'' || '{14days-options}=\'Yes\'' || '{professional-work}=\'Yes\'' || '{bubble}=\'No\'',
+          visibleIf: '{Reason}=\'I have been identified as having been in close contact with someone who has COVID-19\' || {Reason}=\'I received a request by Public Health\' || {Reason}=\'I experienced a risky situation or had similar behaviour\' || {Reason}=\'I am worried / anxious / Other reason\' || {quarantine}=\'Yes\' || {14days-options}=\'Yes\' || {professional-work}=\'Yes\' || {bubble}=\'No\'',
           choices: ['Yes', 'No'],
           colCount: 0
         },
@@ -477,7 +498,7 @@ export class SurveyComponent implements OnInit {
         console.log(JSON.stringify(result.data, null, 3));
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/questions/saveAll');
+        xhr.open('POST', 'http://localhost:8080/screening/saveAll');
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhr.send(JSON.stringify(result.data));
       });
