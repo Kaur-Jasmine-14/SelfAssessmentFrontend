@@ -1,22 +1,22 @@
-<div class="toolbar" role="banner">
-  <p>Québec</p>
+<div class="toolbar" role="banner" style="text-align: center;">
+  <p>COVID-19 Symptom Self-Assessment Tool</p>
 </div>
 
 <div class="content" role="main">
 
   <!-- Highlight Card -->
-  <div class="card highlight-card card-small" style="margin-top:20px;">
+  <!-- <div class="card highlight-card card-small" style="margin-top:20px;">
     <span>COVID-19 Symptom Self-Assessment Tool</span>
-  </div>
+  </div> -->
 
   <!-- Information -->
   <div class="grid" style="margin-top:50px;">
 
     <div class="box">
-      <h4>This tool is not intended to be a substitute for medical attention. Always follow your healthcare professional’s instructions.</h4>
+      <h6 class="alert alert-warning">This tool is not intended to be a substitute for medical attention. Always follow your healthcare professional’s instructions.</h6>
       <p style="margin-top:20px;">This self-assessment tool does not apply to children from 0 to 6 months of age. If you are unsure, call Info-Santé 811.</p>
     </div>
-    <div class="box" style="background-color:rgb(199, 250, 222);">
+    <div class="box" style="background-color:#e6ffe6;">
       <p style="font-size:20px">Are you being asked to get tested for COVID-19, but have no symptoms of the disease?</p>
       <div class="card-container">
         <div class="card card-medium" (click)="selection.value = 'component'" tabindex="0" style="margin-top:10px;">
@@ -26,7 +26,8 @@
     </div>
     <div class="box" style="margin-top:30px;">
       <p>If your child of 6 months to 5 years of age has been showing one or more symptoms on this list for less than 24 hours, it is recommended that you keep them at home and avoid contact with other people.</p>
-      <h4>After 24 hours, re-evaluate the situation to see if there is any change in their symptoms. If one or more symptoms persist for more than 24 hours, proceed with self-assessment.</h4>
+      <br>
+      <h6 class="alert alert-warning">After 24 hours, re-evaluate the situation to see if there is any change in their symptoms. If one or more symptoms persist for more than 24 hours, proceed with self-assessment.</h6>
     </div>
 
     <div class="box" style="margin-top:30px;">
